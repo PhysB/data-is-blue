@@ -1,0 +1,5 @@
+I"�<p>I have a new project at work that means that I get to dive into a new field - natural language processing. My boss and coworkers suggested a few papers for me to read to lay a foundation, and I’m going to write up each one as I go through it. This is, frankly, way more helpful for me than to anyone who might be reading this. However, if you were ever curious about how a physicist interprets and understands natural language processing, well, here’s your look inside my brain.</p>
+
+<p>I’m starting with one of the absolute classic papers in the field: <a href="https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf">“Distributed Representations of Words and Phrases and their Compositionality.”</a> This is the original Google word2vec paper that blew everyone’s minds with the ability to add and subtract words in a meaningful way. E.g. “king-male+female = queen.” Let’s dive in.</p>
+
+:ET

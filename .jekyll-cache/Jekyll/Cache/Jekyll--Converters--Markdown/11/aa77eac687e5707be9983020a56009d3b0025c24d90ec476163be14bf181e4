@@ -1,0 +1,5 @@
+I"<p><img src="/assets/brainfork.gif" alt="Brain fork gif" class="align-center" /></p>
+
+<p>Last time I went through the first few equations of the word2vec paper (Distributed Representations of Words and Phrases and their Compositionality) and thought through how the equation for the probability of an output word, given the input word, compared to another formula of the same form: the Boltzmann Distribution. This time, I’ll finish the paper, which requires me to leave behind the particle analogy almost completely.</p>
+
+:ET
