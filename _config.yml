@@ -101,3 +101,11 @@ defaults:
 
 # Exceept setting
 excerpt_separator: "<!--more-->"
+
+
+# Analytics
+analytics:
+  provider               : "google-universal"
+  google:
+    tracking_id          : UA-150657761-1
+    anonymize_ip         : true
