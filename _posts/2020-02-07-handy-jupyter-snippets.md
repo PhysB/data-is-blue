@@ -16,9 +16,9 @@ display(HTML("<style>.container { width:100% !important; }</style>"))
 ```
 
 ## To auto-reload external packages
-One of the biggest frustrations I have with notebooks is when I am using it to debug code that exists outside the notebook, like a relatively mature repo from which I am importing functions or classes. Unfortunately, by default the notebook only loads that module once and, if you change it, you have to restart the kernal in order to pick up those changes.
+One of the biggest frustrations I have with notebooks is when I am using it to debug code that exists outside the notebook, like a relatively mature repo from which I am importing functions or classes. Unfortunately, by default the notebook only loads that module once and, if you change it, you have to restart the kernel in order to pick up those changes.
 
-Except if you use the following lines of reload magic, it will automatically reload every package in the notebook every time you run a new cell. It does slow the notebook down a tiny bit, but I find that trade-off to be well worth it if I'm actively developing or debugging code that doesn't exist inside the notebook.
+If you use the following lines of reload magic, it will automatically reload every package in the notebook every time you run a new cell. It does slow the notebook down a tiny bit, but I find that trade-off to be well worth it if I'm actively developing or debugging code that doesn't exist inside the notebook.
 
 
 ```
