@@ -5,7 +5,7 @@ categories: python, data science
 ---
 What does it mean to have a calibrated classifier? Why is that important? 
 
-Let's try to answer that question with a minimal amount of [code]((https://github.com/PhysB/blog_notebooks/blob/master/Random%20Forest%20Calibration.ipynb)).
+Let's try to answer that question with a minimal amount of [code](https://github.com/PhysB/blog_notebooks/blob/master/Random%20Forest%20is%20not%20Calibrated.ipynb).
 
 <!--more-->
 
@@ -34,7 +34,7 @@ Why am I picking on random forest in particular? The random forest is one of the
 But! As implemented in the commonly used `scikit-learn` Python package, random forest is *not* a well-calibrated classifier. A naive implementation that simply uses the probabilities of the scikit random forest classifier is probably not doing what you want.
 
 ## Show me
-It takes surprisingly few lines of code to demonstrate this. The notebook with the full code is available [here](https://github.com/PhysB/blog_notebooks/blob/master/Random%20Forest%20Calibration.ipynb).
+It takes surprisingly few lines of code to demonstrate this. The notebook with the full code is available [here](https://github.com/PhysB/blog_notebooks/blob/master/Random%20Forest%20is%20not%20Calibrated.ipynb).
 
 ### Create classification data
 Let's start by making some classification data using the handy scikit `make_classification` function.
