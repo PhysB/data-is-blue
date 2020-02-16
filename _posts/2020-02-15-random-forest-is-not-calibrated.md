@@ -1,7 +1,7 @@
 ---
 title:  "Random Forest is not a Calibrated Classifier"
 date:   2020-02-15 7:00:00 -0700
-categories: python, data science
+categories: python data_science
 ---
 What does it mean to have a calibrated classifier? Why is that important? 
 

@@ -1,7 +1,7 @@
 ---
 title:  "Calibrating a Random Forest Classifier"
 date:   2020-02-16 7:00:00 -0700
-categories: python, data science
+categories: python data_science
 ---
 
 In the previous [blog post](https://dataisblue.io/python,/data/science/2020/02/15/random-forest-is-not-calibrated.html) , we looked at the probability predictions that come out of naive implementation of the `scikit-learn` Random Forest classifier. We noted that the predictions are not well-calibrated, but did not address how to fix that problem, which is the subject of this blog post.

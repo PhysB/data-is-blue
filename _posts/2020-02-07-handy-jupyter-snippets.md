@@ -1,7 +1,7 @@
 ---
 title:  "Handy Jupyter Notebook Snippets for Data Scientists"
 date:   2020-02-07 12:00:00 -0700
-categories: python, data science workflows
+categories: python data_science
 ---
 There are a few snippets of code that I put at the top of literally every single Jupyter notebook I create. I hope some of them are useful to you, too.
 

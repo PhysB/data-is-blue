@@ -1,7 +1,7 @@
 ---
 title:  "Three Books that Changed the Way I Work"
 date:    2018-10-12 12:00:00 -0700
-categories: working, books
+categories: working books
 excerpt_separator: "<!--more-->"
 ---
 **Who this is blog post for**: Knowledge workers, people who work in offices, students, writers, introverts of all stripes.
