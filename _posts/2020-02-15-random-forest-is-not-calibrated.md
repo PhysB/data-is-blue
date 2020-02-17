@@ -74,7 +74,7 @@ We see that predictions coming out of the logistic regression are much closer to
 
 What would using the probabilities coming out of the random forest classifier mean in practice for our business decisions?
 
-* For the customers that we believe have an ~70% chance of wearing a size 10, more ~90% of them actually will. Because of the lower reported probability, some of them will get clothing of the wrong size and be unhappy with their purchases (or request costly refunds and exchanges).
+* For the customers that we believe have an ~70% chance of wearing a size 10, more than ~90% of them actually will. Because of the lower reported probability, some of them will get clothing of the wrong size and be unhappy with their purchases (or request costly refunds and exchanges).
 * Of the customer reviews that the classifier scores as having a 65% probability of being spam (and therefore do not get filtered out of the data set), more than 80% of them will actually be spam. 
 * Our "Get out the Vote" campaign will miss a huge number of people. The group of people who are predicted to have a probability of voting of 40% (and thus would not receive a postcard) have an actual rate of voting of less than 20% (and should have received a postcard). 
 
