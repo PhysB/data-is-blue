@@ -1,0 +1,82 @@
+I"�<p>What does it mean to have a calibrated classifier? Why is that important?</p>
+
+<p>Let’s try to answer that question with a minimal amount of <a href="https://github.com/PhysB/blog_notebooks/blob/master/Random%20Forest%20is%20not%20Calibrated.ipynb">code</a>.</p>
+
+<!--more-->
+
+<h2 id="what-is-a-calibrated-classifier">What is a calibrated classifier?</h2>
+<p>According to the <code class="highlighter-rouge">scikit-learn</code> <a href="https://scikit-learn.org/stable/modules/calibration.html">documentation</a>, a calibrated classifier is defined in the following way:</p>
+
+<blockquote>
+  <p>Well calibrated classifiers are probabilistic classifiers for which the output of the predict_proba method can be directly interpreted as a confidence level. For instance, a well calibrated (binary) classifier should classify the samples such that among the samples to which it gave a predict_proba value close to 0.8, approximately 80% actually belong to the positive class.</p>
+</blockquote>
+
+<p>In plain English, if I am Snow White and I predict that each of the ten apples in my basket has an 80% chance of having been poisoned, then the Evil Queen should have poisoned eight out of ten of those apples.</p>
+
+<h2 id="why-does-it-matter">Why does it matter?</h2>
+<p>It’s common to use the probabilities that come out of machine-learned classifiers to make business decisions. For example:</p>
+<ul>
+  <li>After having trained a classification model to predict clothing sizes, we report to the customers on our website that there is a 80% chance they need a size 10 and a 20% chance they need a size 12.</li>
+  <li>We train a classification model to predict which customer reviews on our products are actually spam messages. We automatically remove customer reviews with a predicted probability of being spam higher than 75%.</li>
+  <li>We’re trying to target a “Get out the Vote” campaign towards people who are unlikely to vote. If their probability of voting in the next election is less than 20%, we send them a postcard encouraging them to register to vote and reminding them of their polling place.</li>
+</ul>
+
+<p>But what if these probabilities are just… <em>wrong</em>?</p>
+
+<p>Well, that’s not good. Customers will buy the wrong sizes and be unhappy with their purchases. Too much spam will slip through the review filters. The wrong people will get our “Get out the Vote” postcards.</p>
+
+<h2 id="the-random-forest-classifier">The Random Forest Classifier</h2>
+<p>The calibration of your prediction probabilities varies depends on the classifier you pick. (Logistic regression, for example, <em>does</em> produce calibrated probabilities.)</p>
+
+<p>Why am I picking on random forest in particular? The random forest is one of the most commonly deployed classification algorithms in data science, and rightly so. It’s robust, easy to use, and typically requires less feature engineering to get good results than other methods.</p>
+
+<p>But! As implemented in the commonly used <code class="highlighter-rouge">scikit-learn</code> Python package, random forest is <em>not</em> a well-calibrated classifier. A naive implementation that simply uses the probabilities of the scikit random forest classifier is probably not doing what you want.</p>
+
+<h2 id="show-me">Show me</h2>
+<p>It takes surprisingly few lines of code to demonstrate this. The notebook with the full code is available <a href="https://github.com/PhysB/blog_notebooks/blob/master/Random%20Forest%20is%20not%20Calibrated.ipynb">here</a>.</p>
+
+<h3 id="create-classification-data">Create classification data</h3>
+<p>Let’s start by making some classification data using the handy scikit <code class="highlighter-rouge">make_classification</code> function.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X, y = make_classification(n_samples=30000, n_features=3, n_informative=3, n_redundant=0, random_state=0, shuffle=False)
+</code></pre></div></div>
+
+<p><img src="/assets/classification1.png" alt="Classification data" class="align-center" /></p>
+
+<h3 id="train-both-logistic-and-random-forest-classifiers">Train both logistic and random forest classifiers</h3>
+
+<p>Split the data into train and test sets. (Not strictly necessary for this example, but good practice regardless.)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+</code></pre></div></div>
+
+<p>Train a random forest classifier and get predictions for the test set.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>clf_rf = RandomForestClassifier(max_depth=3, random_state=0, min_samples_leaf=3).fit(X_train, y_train)
+predictions_rf = clf_rf.predict_proba(X_test)
+</code></pre></div></div>
+
+<p>Train a logistic classifier and get predictions for the test set.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>clf_log = LogisticRegression(random_state=0).fit(X_train, y_train)
+predictions_log = clf_log.predict_proba(X_test)
+</code></pre></div></div>
+
+<h3 id="bin-the-predictions-and-plot-the-two-sets-of-predictions">Bin the predictions and plot the two sets of predictions</h3>
+<p>Bin the test data into ten bins based on the predicted probability of belonging to the positive class (<code class="highlighter-rouge">y=1</code>). If a classifier were perfectly calibrated, then the binned data would exactly follow the <code class="highlighter-rouge">x=y</code> line. That is, if we looked at all the data points that have a predicted probability of <code class="highlighter-rouge">y=1</code> of 20%, then approximately 20% of those points would in fact have <code class="highlighter-rouge">y=1</code>.</p>
+
+<p>We see that predictions coming out of the logistic regression are much closer to perfect calibration than the predictions from the random forest, which tends to overpredict on the low end and underpredict on the high end.</p>
+
+<p><img src="/assets/calibration_plot_rf_log.png" alt="Classification data" class="align-center" /></p>
+
+<p>What would using the probabilities coming out of the random forest classifier mean in practice for our business decisions?</p>
+
+<ul>
+  <li>For the customers that we believe have an ~70% chance of wearing a size 10, more ~90% of them actually will. Because of the lower reported probability, some of them will get clothing of the wrong size and be unhappy with their purchases (or request costly refunds and exchanges).</li>
+  <li>Of the customer reviews that the classifier scores as having a 65% probability of being spam (and therefore do not get filtered out of the data set), more than 80% of them will actually be spam.</li>
+  <li>Our “Get out the Vote” campaign will miss a huge number of people. The group of people who are predicted to have a probability of voting of 40% (and thus would not receive a postcard) have an actual rate of voting of less than 20% (and should have received a postcard).</li>
+</ul>
+
+<p>So what do we do? We can either pick a different classifier or figure out how to calibrate the output of an uncalibrated classifier. That’s too much to cram into one blog post, so I’ll tackle that in a follow-up.</p>
+
+<h2 id="next-time">Next time</h2>
+<p>Calibrating the output of your (uncalibrated) classifier.</p>
+
+:ET
