@@ -62,8 +62,8 @@ plugins:
 author:
   name             : Becky Tucker
   avatar           : "/assets/headshot.jpg"
-  bio              : "Senior Data Scientist at Netflix"
-  location         : "Los Angeles, CA"
+  bio              : "Staff Machine Learning Scientist at Netflix"
+  location         : "Los Gatos, CA"
   email            : "tucker.tech01@gmail.com"
   home             : "https://dataisblue.io"
   github           : "PhysB"
