@@ -61,7 +61,7 @@ plugins:
 ## Author information
 author:
   name             : Becky Tucker
-  avatar           : "/assets/headshot.jpg"
+  avatar           : "/assets/headshot2.jpg"
   bio              : "Staff Machine Learning Scientist at Netflix"
   location         : "Los Gatos, CA"
   email            : "tucker.tech01@gmail.com"
@@ -91,7 +91,7 @@ defaults:
       share: true
       related: true
       sidebar:
-          image: "/assets/headshot.jpg"
+          image: "/assets/headshot2.jpg"
   - scope:
       path: "_pages"
       type: pages
